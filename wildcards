@@ -1,0 +1,22 @@
+Wildcards are a great tool for working with text data.
+
+ques---> product lookup table with alphanumerical SKUs (i.e. small_shirt-123), and wanted to see how many times each SKU appeared in a sales table.
+
+Easy… COUNTIF( sales_range, sku ), right?
+
+The problem was that the SKUs in the sales table were concatenated with other text strings (i.e. 210819&small_shirt-123.large_shirt-456&store-y), so he wasn’t getting any matches.
+
+Here’s where the wildcards come in 😉
+
+Wildcards are special characters used for “fuzzy” text matching.
+
+👉 The asterisk (*) represents zero or more characters
+👉 The question mark (?) represents a single character
+
+For example: “*en*” will return “enrique”, “bend”, and “cement”, but “?en?” will only return “bend”.
+
+Therefore, wrapping a text string in asterisks (*) asks if that text string is contained within another, which gave us our solution:
+
+=COUNTIF( sales_range, “*” & sku & “*” )
+
+If that SKU is contained within any cell of the sales_range, then it will count it.
